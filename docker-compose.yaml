@@ -1,0 +1,40 @@
+version: '3.6'
+
+services:
+
+  python:
+    build:
+      context: .
+    working_dir: /app
+    environment:
+        FLASK_ENV: development
+        FLASK_DEBUG: 1
+        PYTHONUNBUFFERED: 1
+        SQLALCHEMY_DATABASE_URI: postgresql://user:abc123@db:5432/avalah
+    volumes:
+      - ./:/app
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+
+  db:
+    image: postgres:12.2-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: abc123
+      POSTGRES_DB: avalah
+    ports:
+      - 9432:5432
+    volumes:
+      - ./docker/postgres/init/:/docker-entrypoint-initdb.d/ # db init data
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    networks:
+      - backend
+
+
+networks:
+  backend:
+
+volumes:
+  database-data:

@@ -1,0 +1,9 @@
+Dockerfile
+docker
+docker-compose*
+.git
+**/.git
+.gitignore
+.idea
+.vscode
+*.log

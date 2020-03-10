@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API endpoints</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <header>API endpoints</header>
+    <main>
+        <div class="block">
+            <strong>Return product list</strong>
+            <br>
+            Request params:
+            <ul>
+                <li>page - page that you need (int), default is 1</li>
+                <li>per_page - how many items per page (int), default is 10</li>
+            </ul>
+            <code>
+                curl -XGET localhost:5000/products
+            </code>
+            <code>
+                curl -XGET localhost:5000/products?per_page=5&page=1
+            </code>
+        </div>
+
+        <div class="block">
+            <strong>Return product by id</strong>
+            <code>
+                curl -XGET localhost:5000/product/&lt;PRODUCT_ID(UUID)&gt;
+            </code>
+        </div>
+
+        <div class="block">
+            <strong>Change product</strong>
+            <br>
+            Can change only <strong>name</strong> or <strong>price</strong> parameters.
+            <code>
+                curl -XPATCH localhost:5000/product/&lt;PRODUCT_ID(UUID)&gt; -H "Content-Type: application/json; charset=UTF-8" -d '{"name":"NEW_NAME","price":4.95}'
+            </code>
+        </div>
+
+        <div class="block">
+            <strong>Return order list</strong>
+            <br>
+            Request params:
+            <ul>
+                <li>page - page that you need (int), default is 1</li>
+                <li>per_page - how many items per page (int), default is 10</li>
+            </ul>
+            <code>
+                curl -XGET localhost:5000/orders
+            </code>
+            <code>
+                curl -XGET localhost:5000/orders?per_page=5&page=1
+            </code>
+        </div>
+
+        <div class="block">
+            <strong>Return order by id</strong>
+            <code>
+                curl -XGET localhost:5000/order/&lt;ORDER_ID(UUID)&gt;
+            </code>
+        </div>
+
+        <div class="block">
+            <strong>Return related products id list</strong>
+            <code>
+                curl -XGET localhost:5000/related_products/&lt;PRODUCT_ID(UUID)&gt;
+            </code>
+        </div>
+
+    </main>
+</body>
+</html>
